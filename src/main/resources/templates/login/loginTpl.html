@@ -2,16 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>HomePage</title>
+    <title>LoginPage</title>
     <!--bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <div class="row justify-content-center">
-        <h2 th:text="${Title}"></h2>
-    </div>
     <div class="container">
+
+        <div class="row justify-content-center">
+            <h2 th:text="${Title}"></h2>
+        </div>
+
+        <div class="row justify-content-center">
+            <h4 th:text="${subtitle}"></h4>
+        </div>
 
         <form class="needs-validation" action="/login" method="post" novalidate>
 
@@ -19,7 +24,7 @@
             <div class="row justify-content-center">
                 <div class="form-group col-md-3">
                         <label for="InputUserId">UserId</label>
-                        <input type="text" class="form-control" id="inputUserId" name="userid" placeholder="UserId" required>
+                        <input type="text" class="form-control" id="inputUserId" name="userid" placeholder="UserId" required autofocus>
                         <div class="invalid-feedback">
                             Please provide a valid UserId
                         </div>
@@ -45,6 +50,11 @@
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
 
+            <br>
+            <!--AccountForm LINK-->
+            <div class="row justify-content-center">
+                <a href="/account">アカウント登録</a>
+            </div>
         </form>
 
     </div>
