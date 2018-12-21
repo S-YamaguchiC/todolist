@@ -1,4 +1,4 @@
-# SpringとThymeleaf練習用に一つ作る
+# SpringとThymeleaf練習用に一つWebアプリを作る
 
 ## 12/21　進捗
 #### やったこと
