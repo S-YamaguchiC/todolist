@@ -2,19 +2,21 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>TODO</title>
+    <title>AddTodo</title>
     <!--bootstrap-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
         <a class="navbar-brand" th:href="@{todo}">TODO管理サービス</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
                     <a class="nav-link" th:href="@{todo}">ホーム<span class="sr-only">(current)</span></a>
@@ -37,51 +39,59 @@
                     <a class="nav-link" th:href="@{help}">ヘルプ</a>
                 </li>
             </ul>
+
             <form class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="検索ワード" aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
             </form>
+
         </div>
+
     </nav>
-    <!--TODOの一覧表示-->
-    <table class="table">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Detail</th>
-            <th scope="col">post</th>
-            <th scope="col">lastUpdate</th>
-            <th scope="col">Edit</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>年末の大掃除</td>
-            <td>部屋の掃除とかいろいろ</td>
-            <td>2018/12/22</td>
-            <td>2018/12/22</td>
-            <td><a href="#">編集</a></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>年越しプログラミング</td>
-            <td>デスマーチ</td>
-            <td>2018/12/22</td>
-            <td>2018/12/22</td>
-            <td><a href="#">編集</a></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>新年のあいさつ周り</td>
-            <td>実家に規制するんだよぉ</td>
-            <td>2018/12/22</td>
-            <td>2018/12/22</td>
-            <td><a href="#">編集</a></td>
-        </tr>
-        </tbody>
-    </table>
+    <!--TODOの追加フォーム-->
+    <p th:if="${error}">TODOの追加に失敗しました。悲しいね</p>
+    <div class="row justify-content-center">
+        <form class="needs-validation" action="/add" method="post" novalidate>
+            <div class="form-group">
+                <label for="title">Todo title</label>
+                <input type="text" class="form-control" id="title" name="title" placeholder="Todo Title" required autofocus>
+                <div class="invalid-feedback">
+                    Please provide a valid Title
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="detail">Detail</label>
+                <textarea class="form-control" id="detail" name="detail" placeholder="Less than 500 characters"></textarea>
+            </div>
+            <br>
+            <div class="row justify-content-center">
+                <button type="submit" class="btn btn-primary">ADD</button>
+            </div>
+            <br>
+            <p>※寂しすぎるので今後機能を追加する予定</p>
+        </form>
+    </div>
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
     <!--bootstrap-->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
