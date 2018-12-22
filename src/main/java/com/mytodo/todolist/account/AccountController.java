@@ -25,7 +25,7 @@ public class AccountController {
             Model model,
             @RequestParam("userid")String userid,
             @RequestParam("passwd")String passwd
-            ) {
+    ) {
         if(accountService.addAccount(userid, passwd).equals("success")) {
             return "account/accountResultTpl";
         } else {

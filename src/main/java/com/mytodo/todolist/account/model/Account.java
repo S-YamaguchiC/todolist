@@ -1,8 +1,5 @@
 package com.mytodo.todolist.account.model;
 
-
-import lombok.Data;
-
 import javax.persistence.*;
 
 @Entity
