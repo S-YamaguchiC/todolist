@@ -1,5 +1,6 @@
 package com.mytodo.todolist.login;
 
+import com.mytodo.todolist.SessionManager;
 import com.mytodo.todolist.login.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,9 @@ public class LoginController {
     @Autowired
     LoginService loginService;
 
+    @Autowired
+    SessionManager sessionManager;
+
     @RequestMapping(method = RequestMethod.GET)
     public String LoginForm(Model model) {
         return "login/loginTpl";
@@ -27,6 +31,8 @@ public class LoginController {
             @RequestParam("passwd")String passwd
     ) {
         if (loginService.loginAuth(userid, passwd).equals("success")) {
+            sessionManager.setUserid(userid);
+            model.addAttribute("name", sessionManager.getUserid()+"さん");
             return "todo/todoHomeTpl";
         } else {
             model.addAttribute("error", true);
