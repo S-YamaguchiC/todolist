@@ -23,7 +23,10 @@ public class AccountService {
         Account account = new Account();
         account.setUserid(userid);
         account.setPasswd(passwd);
-        accountRepository.save(account);
-        return "insert ok";
+        if (accountRepository.save(account).equals("success")) {
+            return "success";
+        } else {
+            return "failed";
+        }
     }
 }

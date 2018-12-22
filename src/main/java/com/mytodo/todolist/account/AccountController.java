@@ -17,16 +17,20 @@ public class AccountController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String AccountForm(Model model) {
-        model.addAttribute("Title", "アカウント登録");
         return "account/accountTpl";
     }
 
     @RequestMapping(method = RequestMethod.POST)
     public String Account(
+            Model model,
             @RequestParam("userid")String userid,
             @RequestParam("passwd")String passwd
             ) {
-        accountService.addAccount(userid, passwd);
-        return "account/accountResultTpl";
+        if(accountService.addAccount(userid, passwd).equals("success")) {
+            return "account/accountResultTpl";
+        } else {
+            model.addAttribute("error", true);
+            return "account/accountTpl";
+        }
     }
 }

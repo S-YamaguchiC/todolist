@@ -20,9 +20,14 @@ public class AccountRepositoryImpl implements AccountRepository {
 
     @Override
     public String save(Account account) {
-        String sql = "insert into users(userid, passwd) values (?,?)";
-        if (jdbcTemplate.update(sql, account.getUserid(), account.getPasswd()) == 1) {
-            return "success";
+        String sql1 = "select count(userid) from users where userid = ?";
+        String sql2 = "insert into users(userid, passwd) values (?,?)";
+        if (jdbcTemplate.queryForObject(sql1, Integer.class, account.getUserid()) == 0) {
+            if (jdbcTemplate.update(sql2, account.getUserid(), account.getPasswd()) == 1) {
+                return "success";
+            } else {
+                return "failed";
+            }
         } else {
             return "failed";
         }
