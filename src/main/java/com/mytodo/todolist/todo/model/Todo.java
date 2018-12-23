@@ -2,6 +2,7 @@ package com.mytodo.todolist.todo.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "todos")
@@ -32,6 +33,12 @@ public class Todo {
     public String getUserid() { return this.userid; }
     public String getTitle() { return this.title; }
     public String getDetail() { return this.detail; }
-    public Timestamp getPost_time() { return this.post_time; }
-    public Timestamp getLast_update_time() { return this.last_update_time; }
+    public Timestamp getPost_time() {
+        post_time = Timestamp.valueOf(LocalDateTime.now());
+        return this.post_time;
+    }
+    public Timestamp getLast_update_time() {
+        last_update_time = Timestamp.valueOf(LocalDateTime.now());
+        return this.last_update_time;
+    }
 }
