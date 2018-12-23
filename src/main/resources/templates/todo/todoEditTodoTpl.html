@@ -8,45 +8,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" th:href="@{todo}">TODO管理サービス</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{../../todo}">TODO管理サービス</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" th:href="@{todo}">ホーム<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{add}">TODOの追加</a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    アカウントの管理
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <p class="dropdown-item" th:text="${name}"></p>
-                    <a class="dropdown-item" href="#">アカウント情報の変更</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" th:href="@{logout}">ログアウト</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{../../todo}">ホーム<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{../../add}">TODOの追加</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        アカウントの管理
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <p class="dropdown-item" th:text="${name}"></p>
+                        <a class="dropdown-item" href="#">アカウント情報の変更</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{../../logout}">ログアウト</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{../../help}">ヘルプ</a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="検索ワード" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
+            </form>
+        </div>
+    </nav>
+    <!--TODOの編集画面-->
+    <div class="container">
+        <div class="row justify-content-center">
+            <h4 th:if="${error}" style="color: red;">変更に失敗しました</h4>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-header">
+                        <h4>変更するTODO</h4>
+                    </div>
+                    <div class="card-body">
+                        <label class="card-title" for="title">Todo title</label>
+                        <h5 class="card-title" th:text="${title}">Card title</h5>
+                        <br>
+                        <label class="card-text" for="detail">Detail</label>
+                        <p class="card-text" th:text="${detail}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{help}">ヘルプ</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="検索ワード" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
-        </form>
+            </div>
+            <div class="col order-8">
+                <div class="card" style="width: 18rem;">
+                    <form class="needs-validation" action="/edit" method="post" novalidate>
+                        <div class="card-header">
+                            <h4>TODOの変更</h4>
+                        </div>
+                        <div class="card-body">
+                            <label class="card-title" for="title">Todo title</label>
+                            <input type="text" class="form-control" id="title" name="title" placeholder="Todo Title" required autofocus>
+                            <div class="invalid-feedback">
+                                Please provide a valid Title
+                            </div>
+                            <br>
+                            <label class="card-text" for="detail">Detail</label>
+                            <textarea class="form-control" id="detail" name="detail" placeholder="Less than 500 characters"></textarea>
+                            <input type="hidden" name="post" th:value="${post_hidden}">
+                        </div>
+                        <div class="card-footer">
+                            <div class="row justify-content-center">
+                                <button type="submit" class="btn btn-primary">変更</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col order-4">
+                <img src="https://puu.sh/ClZgY/d7a9313c49.png" alt="やじるし">
+            </div>
+        </div>
     </div>
-</nav>
-<!--TODOの追加フォーム-->
-<!--bootstrap-->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+
+    <!--bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </body>
 </html>

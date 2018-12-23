@@ -29,7 +29,7 @@ public class TodoController {
         if (Objects.isNull(sessionManager.getUserid())) {
             return "login/loginTpl";
         } else {
-            List<Todo> todoList = todoService.findTodo(sessionManager.getUserid());
+            List<Todo> todoList = todoService.findAllTodo(sessionManager.getUserid());
             if (!Objects.isNull(todoList)) {
                 model.addAttribute("todoList", todoList);
             } else {

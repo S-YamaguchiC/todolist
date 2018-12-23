@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
-import java.util.Objects;
 
 @Repository
 @Transactional
@@ -42,9 +42,10 @@ public class TodoRepositoryImpl implements TodoRepository {
     }
 
     @Override
-    public List<Todo> findTitle(String userid) {
-        String sql = "select * from todos where userid = ?";
-        List<Todo> titles = jdbcTemplate.query(sql, new RowMapper<Todo>() {
+    public List<Todo> findAllTodo(String userid) {
+        String sql = "select * from todos where userid = ? order by post_time asc ";
+        List<Todo> allTodo = jdbcTemplate.query(sql, new RowMapper<Todo>() {
+            @SuppressWarnings("Duplicates") // よくわからんがWarningが邪魔なのでつけた
             @Override
             public Todo mapRow(ResultSet resultSet, int rowNumber) throws SQLException {
                 Todo todos = new Todo();
@@ -56,6 +57,42 @@ public class TodoRepositoryImpl implements TodoRepository {
                 return todos;
             }
         }, userid);
-        return titles;
+        return allTodo;
+    }
+
+    @Override
+    public List<Todo> findOneTodo(String userid, Timestamp post) {
+        String sql = "select * from todos where userid = ? and post_time = ?";
+        List<Todo> oneTodo = jdbcTemplate.query(sql, new RowMapper<Todo>() {
+            @SuppressWarnings("Duplicates")
+            @Override
+            public Todo mapRow(ResultSet resultSet, int i) throws SQLException {
+                Todo todo = new Todo();
+                todo.setUserid(resultSet.getString("userid"));
+                todo.setTitle(resultSet.getString("title"));
+                todo.setDetail(resultSet.getString("detail"));
+                todo.setPost_time(resultSet.getTimestamp("post_time"));
+                todo.setLast_update_time(resultSet.getTimestamp("last_update_time"));
+                return todo;
+            }
+        }, userid, post);
+        return oneTodo;
+    }
+
+    @Override
+    public String editTodo(Todo todo) {
+        String sql = "update todos set title = ?, detail = ?, last_update_time = ? where userid = ? and post_time = ?";
+        if (jdbcTemplate.update(
+                sql,
+                todo.getTitle(),
+                todo.getDetail(),
+                todo.getLast_update_time(),
+                todo.getUserid(),
+                todo.getPost_time()) == 1)
+        {
+            return "success";
+        } else {
+            return "failed";
+        }
     }
 }

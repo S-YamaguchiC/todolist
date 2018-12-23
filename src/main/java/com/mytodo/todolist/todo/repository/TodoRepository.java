@@ -3,6 +3,7 @@ package com.mytodo.todolist.todo.repository;
 import com.google.inject.ImplementedBy;
 import com.mytodo.todolist.todo.model.Todo;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @ImplementedBy(TodoRepository.class)
@@ -17,11 +18,17 @@ public interface TodoRepository {
      * UserIdに紐付いたTODOをすべて検索
      * 参考：https://tokkan.net/spring/jdbc.html
      * */
-    List<Todo> findTitle(String userid);
+    List<Todo> findAllTodo(String userid);
 
     /**
-     * UserIdを使って既存のTodoを編集
+     * UserIdとPostTimeをもとにTODOを1件取得
      * */
+    List<Todo> findOneTodo(String userid, Timestamp post);
+
+    /**
+     * UserIdとPostTimeを使って既存のTodoを編集
+     * */
+    String editTodo(Todo todo);
 
     /**
      * UserIdを使って既存のTodoを削除

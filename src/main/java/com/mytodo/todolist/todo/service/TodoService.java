@@ -32,12 +32,36 @@ public class TodoService {
         }
     }
 
-    public List<Todo> findTodo(String userid) {
-        List<Todo> todoList = todoRepository.findTitle(userid);
+    public List<Todo> findAllTodo(String userid) {
+        List<Todo> todoList = todoRepository.findAllTodo(userid);
         if (!Objects.isNull(todoList)) {
             return todoList;
         } else {
             return null;
+        }
+    }
+
+    public List<Todo> findOneTodo(String userid, Timestamp post) {
+        List<Todo> todoList = todoRepository.findOneTodo(userid, post);
+        if (!Objects.isNull(todoList)) {
+            return todoList;
+        } else {
+            return null;
+        }
+    }
+
+    public String editTodo(String userid, Timestamp post, String title, String detail) {
+        // TODO変更の処理
+        Todo todo = new Todo();
+        todo.setUserid(userid);
+        todo.setTitle(title);
+        todo.setDetail(detail);
+        todo.setPost_time(post);
+        todo.setLast_update_time(Timestamp.valueOf(LocalDateTime.now()));
+        if (todoRepository.editTodo(todo).equals("success")) {
+            return "success";
+        } else {
+            return "failed";
         }
     }
 }
