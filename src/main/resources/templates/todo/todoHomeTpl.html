@@ -58,10 +58,10 @@
         <tbody>
         <tr th:each="todo, stat : ${todoList}">
             <td th:text="${stat.count}"></td>
-            <td th:text="${todo.getTitle()}"></td>
-            <td th:text="${todo.getDetail()}"></td>
-            <td th:text="${todo.getPost_time()}"></td>
-            <td th:text="${todo.getLast_update_time()}"></td>
+            <td th:text="${todo.title}"></td>
+            <td th:text="${todo.detail}"></td>
+            <td th:text="${todo.post_time}"></td>
+            <td th:text="${todo.last_update_time}"></td>
             <td><a href="#">編集</a></td>
         </tr>
         </tbody>
