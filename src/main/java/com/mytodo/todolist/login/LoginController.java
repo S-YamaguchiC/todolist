@@ -41,7 +41,7 @@ public class LoginController {
     ) {
         if (loginService.loginAuth(userid, passwd).equals("success")) {
             sessionManager.setUserid(userid);
-            List<Todo> todoList = todoService.findTodo(sessionManager.getUserid());
+            List<Todo> todoList = todoService.findAllTodo(sessionManager.getUserid());
             if (!Objects.isNull(todoList)) {
                 model.addAttribute("todoList", todoList);
             } else {
