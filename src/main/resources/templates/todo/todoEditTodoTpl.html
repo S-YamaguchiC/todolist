@@ -37,10 +37,6 @@
                     <a class="nav-link" th:href="@{../../help}">ヘルプ</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="検索ワード" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
-            </form>
         </div>
     </nav>
     <!--TODOの編集画面-->
@@ -63,7 +59,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col order-8">
+            <div class="col order-12">
                 <div class="card" style="width: 18rem;">
                     <form class="needs-validation" action="/edit" method="post" novalidate>
                         <div class="card-header">
@@ -88,7 +84,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col order-4">
+            <div class="col order-0">
                 <img src="https://puu.sh/ClZgY/d7a9313c49.png" alt="やじるし">
             </div>
         </div>

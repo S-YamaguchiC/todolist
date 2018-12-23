@@ -40,16 +40,13 @@
                 </li>
             </ul>
 
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="検索ワード" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="button">Search</button>
-            </form>
-
         </div>
 
     </nav>
     <!--TODOの追加フォーム-->
-    <p th:if="${error}">TODOの追加に失敗しました。悲しいね</p>
+    <div class="row justify-content-center">
+        <p th:if="${error}" style="color: red">TODOの追加に失敗しました。悲しいね</p>
+    </div>
     <div class="row justify-content-center">
         <form class="needs-validation" action="/add" method="post" novalidate>
             <div class="form-group">
