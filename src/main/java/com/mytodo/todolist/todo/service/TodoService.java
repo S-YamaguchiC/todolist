@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.Objects;
+
 @Service
 @Transactional
 public class TodoService {
@@ -22,6 +25,15 @@ public class TodoService {
             return "success";
         } else {
             return "failed";
+        }
+    }
+
+    public List<Todo> findTodo(String userid) {
+        List<Todo> todoList = todoRepository.findTitle(userid);
+        if (!Objects.isNull(todoList)) {
+            return todoList;
+        } else {
+            return null;
         }
     }
 }

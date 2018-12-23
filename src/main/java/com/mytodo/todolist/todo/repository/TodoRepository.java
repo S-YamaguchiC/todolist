@@ -19,12 +19,6 @@ public interface TodoRepository {
      * */
     List<Todo> findTitle(String userid);
 
-    List<String> findDetail(String userid);
-
-    List<String> findPosttime(String userid);
-
-    List<String> findLastUpdatetime(String userid);
-
     /**
      * UserIdを使って既存のTodoを編集
      * */

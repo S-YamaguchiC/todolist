@@ -56,28 +56,12 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>年末の大掃除</td>
-            <td>部屋の掃除とかいろいろ</td>
-            <td>2018/12/22</td>
-            <td>2018/12/22</td>
-            <td><a href="#">編集</a></td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>年越しプログラミング</td>
-            <td>デスマーチ</td>
-            <td>2018/12/22</td>
-            <td>2018/12/22</td>
-            <td><a href="#">編集</a></td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>新年のあいさつ周り</td>
-            <td>実家に規制するんだよぉ</td>
-            <td>2018/12/22</td>
-            <td>2018/12/22</td>
+        <tr th:each="todo, stat : ${todoList}">
+            <td th:text="${stat.count}"></td>
+            <td th:text="${todo.getTitle()}"></td>
+            <td th:text="${todo.getDetail()}"></td>
+            <td th:text="${todo.getPost_time()}"></td>
+            <td th:text="${todo.getLast_update_time()}"></td>
             <td><a href="#">編集</a></td>
         </tr>
         </tbody>

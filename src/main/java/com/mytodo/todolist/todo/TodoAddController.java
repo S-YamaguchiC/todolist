@@ -1,6 +1,7 @@
 package com.mytodo.todolist.todo;
 
 import com.mytodo.todolist.SessionManager;
+import com.mytodo.todolist.todo.model.Todo;
 import com.mytodo.todolist.todo.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Controller
@@ -23,7 +26,6 @@ public class TodoAddController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String AddForm(Model model) {
-        //認証がなければログインページに
         if (Objects.isNull(sessionManager.getUserid())) {
             return "login/loginTpl";
         } else {
@@ -39,7 +41,12 @@ public class TodoAddController {
             @RequestParam("detail")String detail
     ) {
         if(todoService.addTodo(sessionManager.getUserid(), title, detail).equals("success")) {
-            // 追加したことを表示するのもあり
+            List<Todo> todoList = todoService.findTodo(sessionManager.getUserid());
+            if (!Objects.isNull(todoList)) {
+                model.addAttribute("todoList", todoList);
+            } else {
+                model.addAttribute("todoList", new ArrayList<Todo>());
+            }
             model.addAttribute("name", sessionManager.getUserid()+"さん");
             return "todo/todoHomeTpl";
         } else {
