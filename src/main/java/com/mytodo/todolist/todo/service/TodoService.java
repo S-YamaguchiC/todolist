@@ -51,7 +51,6 @@ public class TodoService {
     }
 
     public String editTodo(String userid, Timestamp post, String title, String detail) {
-        // TODO変更の処理
         Todo todo = new Todo();
         todo.setUserid(userid);
         todo.setTitle(title);
@@ -59,6 +58,17 @@ public class TodoService {
         todo.setPost_time(post);
         todo.setLast_update_time(Timestamp.valueOf(LocalDateTime.now()));
         if (todoRepository.editTodo(todo).equals("success")) {
+            return "success";
+        } else {
+            return "failed";
+        }
+    }
+
+    public String deleteTodo(String userid, Timestamp post) {
+        Todo todo = new Todo();
+        todo.setUserid(userid);
+        todo.setPost_time(post);
+        if (todoRepository.deleteTodo(todo).equals("success")) {
             return "success";
         } else {
             return "failed";

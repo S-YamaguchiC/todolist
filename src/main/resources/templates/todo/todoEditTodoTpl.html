@@ -57,6 +57,35 @@
                         <label class="card-text" for="detail">Detail</label>
                         <p class="card-text" th:text="${detail}">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
                     </div>
+                    <div class="card-footer">
+                        <div class="row justify-content-center">
+                            <form action="/edit" method="post">
+                                <input type="hidden" name="post" th:value="${post_hidden}">
+                                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter">TODOを削除</button>
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalCenterTitle">削除の確認</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <h4>本当にこのTODOを削除しますか？</h4>
+                                                <h6>※確定した場合、この操作は取り消せません</h6>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+                                                <button type="submit" name="delete" class="btn btn-danger">削除する</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col order-12">
@@ -74,11 +103,10 @@
                             <br>
                             <label class="card-text" for="detail">Detail</label>
                             <textarea class="form-control" id="detail" name="detail" placeholder="Less than 500 characters"></textarea>
-                            <input type="hidden" name="post" th:value="${post_hidden}">
                         </div>
                         <div class="card-footer">
                             <div class="row justify-content-center">
-                                <button type="submit" class="btn btn-primary">変更</button>
+                                <button type="submit" name="edit" class="btn btn-primary">変更</button>
                             </div>
                         </div>
                     </form>

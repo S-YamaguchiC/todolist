@@ -95,4 +95,14 @@ public class TodoRepositoryImpl implements TodoRepository {
             return "failed";
         }
     }
+
+    @Override
+    public String deleteTodo(Todo todo) {
+        String sql = "delete from todos where userid = ? and post_time = ?";
+        if (jdbcTemplate.update(sql, todo.getUserid(), todo.getPost_time()) == 1) {
+            return "success";
+        } else {
+            return "failed";
+        }
+    }
 }

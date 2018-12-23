@@ -49,7 +49,7 @@ public class TodoEditController {
         }
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(params = "edit", method = RequestMethod.POST)
     public String Edit(
             Model model,
             @RequestParam("title")String title,
@@ -63,10 +63,30 @@ public class TodoEditController {
             } else {
                 model.addAttribute("todoList", new ArrayList<Todo>());
             }
-            model.addAttribute("name", sessionManager.getUserid()+"さん");
+            model.addAttribute("name", sessionManager.getUserid() + "さん");
             return "todo/todoHomeTpl";
         } else {
             model.addAttribute("error", true);
+            return "todo/todoEditTodoTpl";
+        }
+    }
+
+    @RequestMapping(params = "delete", method = RequestMethod.POST)
+    public String Delete(
+            Model model,
+            @RequestParam("post")Timestamp post
+    ) {
+        if (todoService.deleteTodo(sessionManager.getUserid(), post).equals("success")) {
+            List<Todo> todoList = todoService.findAllTodo(sessionManager.getUserid());
+            if (!Objects.isNull(todoList)) {
+                model.addAttribute("todoList", todoList);
+            } else {
+                model.addAttribute("todoList", new ArrayList<Todo>());
+            }
+            model.addAttribute("name", sessionManager.getUserid() + "さん");
+            return "todo/todoHomeTpl";
+        } else {
+            model.addAttribute("name", sessionManager.getUserid() + "さん");
             return "todo/todoEditTodoTpl";
         }
     }

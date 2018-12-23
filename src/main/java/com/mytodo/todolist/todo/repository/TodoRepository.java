@@ -31,6 +31,7 @@ public interface TodoRepository {
     String editTodo(Todo todo);
 
     /**
-     * UserIdを使って既存のTodoを削除
+     * UserIdとPostTimeを使って既存のTodoを削除
      * */
+    String deleteTodo(Todo todo);
  }
