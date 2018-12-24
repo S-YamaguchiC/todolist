@@ -30,7 +30,7 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <p class="dropdown-item" th:text="${name}"></p>
-                        <a class="dropdown-item" href="#">アカウント情報の変更</a>
+                        <a class="dropdown-item" th:href="@{change}">アカウント情報の変更</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" th:href="@{logout}">ログアウト</a>
                     </div>
@@ -43,13 +43,18 @@
         </div>
 
     </nav>
+
+    <br>
     <!--TODOの追加フォーム-->
     <div class="row justify-content-center">
         <h2>追加するTODOの作成</h2>
     </div>
+
+    <br>
     <div class="row justify-content-center">
         <p th:if="${error}" style="color: red">TODOの追加に失敗しました。悲しいね</p>
     </div>
+
     <div class="row justify-content-center">
         <form class="needs-validation" action="/add" method="post" novalidate>
             <div class="form-group">
@@ -65,7 +70,7 @@
             </div>
             <br>
             <div class="row justify-content-center">
-                <button type="submit" class="btn btn-primary">ADD</button>
+                <button type="submit" class="btn btn-primary">TODOの追加</button>
             </div>
             <br>
             <p>※寂しすぎるので今後機能を追加する予定</p>
