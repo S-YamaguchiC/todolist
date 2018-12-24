@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>LogoutPage</title>
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-    <p>Logout</p>
-    <a th:href="@{login}">ログインページ</a>
+    <div class="jumbotron">
+        <h1 class="display-4">Log out</h1>
+        <p class="lead">Bootstrapの使い回しでごめんなさい</p>
+        <hr class="my-4">
+        <p>さあ、もう一度ログインしてTODOの管理をしましょう！TODO管理サービスは君たちを待っている！</p>
+        <a class="btn btn-primary btn-lg" th:href="@{login}" role="button">Login</a>
+    </div>
 </body>
 </html>
