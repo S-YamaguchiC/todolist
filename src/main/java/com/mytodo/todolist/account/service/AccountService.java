@@ -15,15 +15,22 @@ public class AccountService {
     @Autowired
     AccountRepository accountRepository;
 
-    public List<Account> selectAll() {
-        return null;
-    }
-
-    public String addAccount(String userid, String passwd) {
+    public String saveAccount(String userid, String passwd) {
         Account account = new Account();
         account.setUserid(userid);
         account.setPasswd(passwd);
         if (accountRepository.save(account).equals("success")) {
+            return "success";
+        } else {
+            return "failed";
+        }
+    }
+
+    public String changeAccount(String oldId, String passwd, String newId) {
+        Account account = new Account();
+        account.setUserid(oldId);
+        account.setPasswd(passwd);
+        if (accountRepository.change(account, newId).equals("success")) {
             return "success";
         } else {
             return "failed";

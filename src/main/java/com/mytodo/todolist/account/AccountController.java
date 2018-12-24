@@ -26,7 +26,7 @@ public class AccountController {
             @RequestParam("userid")String userid,
             @RequestParam("passwd")String passwd
     ) {
-        if(accountService.addAccount(userid, passwd).equals("success")) {
+        if(accountService.saveAccount(userid, passwd).equals("success")) {
             return "account/accountResultTpl";
         } else {
             model.addAttribute("error", true);

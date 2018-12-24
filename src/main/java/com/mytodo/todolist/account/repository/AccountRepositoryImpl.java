@@ -32,4 +32,19 @@ public class AccountRepositoryImpl implements AccountRepository {
             return "failed";
         }
     }
+
+    @Override
+    public String change(Account account, String newId) {
+        String sql1 = "select count(userid) from users where userid = ? and passwd = ?";
+        String sql2 = "update users set userid = ? where userid = ? and passwd = ?";
+        if (jdbcTemplate.queryForObject(sql1, Integer.class, account.getUserid(), account.getPasswd()) == 1) {
+            if (jdbcTemplate.update(sql2, newId, account.getUserid(), account.getPasswd()) == 1) {
+                return "success";
+            } else {
+                return "failed";
+            }
+        } else {
+            return "failed";
+        }
+    }
 }

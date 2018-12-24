@@ -10,4 +10,9 @@ public interface AccountRepository {
      * アカウント登録
      * */
     String save(Account account);
+
+    /**
+     * アカウントのID変更
+     * */
+    String change(Account account, String newId);
 }
