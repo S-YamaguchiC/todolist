@@ -6,6 +6,10 @@ import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
 
+/**
+ * 参考:https://kuwalab.hatenablog.jp/entry/spring_mvc41/030
+ * */
+
 @Component
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class SessionManager implements Serializable {
