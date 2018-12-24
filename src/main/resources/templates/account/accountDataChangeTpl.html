@@ -89,6 +89,39 @@
 
     </form>
 
+    <form class="needs-validation" action="/change" method="post" novalidate>
+        <br><br><br>
+        <!--Delete-->
+        <div class="row justify-content-center">
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModalCenter" name="delete">このアカウントを削除</button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalCenterTitle">削除の確認</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>このアカウントの削除にはパスワードが必要です</h5>
+                            <small class="form-text text-muted">この操作を確定した場合、取り消しはできません。</small>
+                            <input type="password" class="form-control col-md-8" name="pass" placeholder="パスワード" required autofocus>
+                            <div class="invalid-feedback">
+                                Please provide a valid Password
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">戻る</button>
+                            <button type="submit" name="delete" class="btn btn-danger">削除する</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
     <script>
         // Example starter JavaScript for disabling form submissions if there are invalid fields
         (function() {

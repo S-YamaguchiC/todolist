@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Objects;
+
 @Controller
 @RequestMapping("/change")
 public class AccountDataChangeController {
@@ -21,11 +23,15 @@ public class AccountDataChangeController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String AccountDataChangeForm(Model model) {
-        model.addAttribute("name", sessionManager.getUserid() + "さん");
-        return "account/accountDataChangeTpl";
+        if (Objects.isNull(sessionManager.getUserid())) {
+            return "login/loginTpl";
+        } else {
+            model.addAttribute("name", sessionManager.getUserid() + "さん");
+            return "account/accountDataChangeTpl";
+        }
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(params = "change" ,method = RequestMethod.POST)
     public String AccountDataChange(
             Model model,
             @RequestParam("pass")String pass,
@@ -36,7 +42,22 @@ public class AccountDataChangeController {
             return "login/loginTpl";
         } else {
             model.addAttribute("error", true);
-            model.addAttribute("name", sessionManager.getUserid());
+            model.addAttribute("name", sessionManager.getUserid() + "さん");
+            return "account/accountDataChangeTpl";
+        }
+    }
+
+    @RequestMapping(params = "delete", method = RequestMethod.POST)
+    public String AccountDelete(
+            Model model,
+            @RequestParam("pass")String pass
+    ) {
+        if (accountService.deleteAccount(sessionManager.getUserid(), pass).equals("success")) {
+            model.addAttribute("deleted", true);
+            return "account/accountTpl";
+        } else {
+            model.addAttribute("name", sessionManager.getUserid() + "さん");
+            model.addAttribute("error", true);
             return "account/accountDataChangeTpl";
         }
     }

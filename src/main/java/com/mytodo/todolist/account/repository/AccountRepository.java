@@ -15,4 +15,9 @@ public interface AccountRepository {
      * アカウントのID変更
      * */
     String change(Account account, String newId);
+
+    /**
+     * アカウントの削除
+     * */
+    String delete(Account account);
 }

@@ -36,4 +36,15 @@ public class AccountService {
             return "failed";
         }
     }
+
+    public String deleteAccount(String userid, String passwd) {
+        Account account = new Account();
+        account.setUserid(userid);
+        account.setPasswd(passwd);
+        if (accountRepository.delete(account).equals("success")) {
+            return "success";
+        } else {
+            return "failed";
+        }
+    }
 }
