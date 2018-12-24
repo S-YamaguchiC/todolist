@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AccountDataChange</title>
+    <!--bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" th:href="@{todo}">TODO管理サービス</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" th:href="@{todo}">ホーム<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{add}">TODOの追加</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        アカウントの管理
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <p class="dropdown-item" th:text="${name}"></p>
+                        <a class="dropdown-item" th:href="@{change}">アカウント情報の変更</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{logout}">ログアウト</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{help}">ヘルプ</a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <br>
+    <div class="row justify-content-center">
+        <h2>アカウントIDの変更</h2>
+    </div>
+
+    <div class="row justify-content-center">
+        <h5 th:if="${error}" style="color: red;">パスワードが間違っています</h5>
+    </div>
+
+    <br>
+    <!--登録情報の変更フォーム(とりあえずIDだけ)-->
+    <form class="needs-validation" action="/change" method="post" novalidate>
+
+        <!--Password-->
+        <div class="row justify-content-center">
+            <div class="form-group col-md-2">
+                <label for="inputPassword">Password</label>
+                <input type="password" class="form-control" id="inputPassword" name="pass" placeholder="Password" required autofocus>
+                <small id="passHelp" class="form-text text-muted">現在のパスワードを入力</small>
+                <div class="invalid-feedback">
+                    Please provide a valid Password
+                </div>
+                <!--<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error!</span>-->
+            </div>
+        </div>
+
+        <!--userId-->
+        <div class="row justify-content-center">
+            <div class="form-group col-md-2">
+                <label for="InputNewUserId">New UserId</label>
+                <input type="text" class="form-control" id="inputNewUserId" name="newId" placeholder="New UserId" required>
+                <div class="invalid-feedback">
+                    Please provide a valid New UserId
+                </div>
+                <small id="newIdHelp" class="form-text text-muted">新しいIDを入力(半角英数16文字)</small>
+                <!--<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">error!</span>-->
+            </div>
+        </div>
+
+        <!--Submit-->
+        <div class="row justify-content-center">
+            <button type="submit" class="btn btn-primary" name="change">IDを変更する</button>
+        </div>
+
+    </form>
+
+    <script>
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (function() {
+            'use strict';
+            window.addEventListener('load', function() {
+                // Fetch all the forms we want to apply custom Bootstrap validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function(form) {
+                    form.addEventListener('submit', function(event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+        })();
+    </script>
+    <!--bootstrap-->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
