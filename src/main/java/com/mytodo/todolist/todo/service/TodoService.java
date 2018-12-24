@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -72,6 +73,15 @@ public class TodoService {
             return "success";
         } else {
             return "failed";
+        }
+    }
+
+    public List<Todo> searchTodo(String userid, String key) {
+        List<Todo> todoList = todoRepository.searchTodo(userid, key);
+        if (!Objects.isNull(todoList)) {
+            return todoList;
+        } else {
+            return null;
         }
     }
 }

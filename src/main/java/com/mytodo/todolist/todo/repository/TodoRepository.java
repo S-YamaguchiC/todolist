@@ -34,4 +34,9 @@ public interface TodoRepository {
      * UserIdとPostTimeを使って既存のTodoを削除
      * */
     String deleteTodo(Todo todo);
+
+    /**
+     * UserIdと検索キーワードでTodoを検索
+     * */
+    List<Todo> searchTodo(String userid, String key);
  }

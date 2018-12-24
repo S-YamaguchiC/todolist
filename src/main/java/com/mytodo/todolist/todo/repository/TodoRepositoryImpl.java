@@ -105,4 +105,28 @@ public class TodoRepositoryImpl implements TodoRepository {
             return "failed";
         }
     }
+
+    @Override
+    public List<Todo> searchTodo(String userid, String key) {
+        String sql1 = "select * from " +
+                "(select * from todos where title Ilike ? or detail ILIKE ?) as result1" +
+                " where result1.userid = ?";
+        //noinspection Duplicates
+        @SuppressWarnings("Duplicates")
+        List<Todo> todoList = jdbcTemplate.query(sql1, new RowMapper<Todo>() {
+            @Override
+            public Todo mapRow(ResultSet resultSet, int i) throws SQLException {
+                Todo todos = new Todo();
+                todos.setUserid(resultSet.getString("userid"));
+                todos.setTitle(resultSet.getString("title"));
+                todos.setDetail(resultSet.getString("detail"));
+                todos.setPost_time(resultSet.getTimestamp("post_time"));
+                todos.setLast_update_time(resultSet.getTimestamp("last_update_time"));
+                return todos;
+            }
+        }, "%"+key+"%", "%"+key+"%", userid);
+        return todoList;
+    }
+
+
 }
