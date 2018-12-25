@@ -40,8 +40,16 @@ public class AccountDataChangeController {
         if (accountService.changeAccount(sessionManager.getUserid(), pass, newId).equals("success")) {
             model.addAttribute("changed", true);
             return "login/loginTpl";
+        } else if(accountService.changeAccount(sessionManager.getUserid(), pass, newId).equals("failed2")) {
+            model.addAttribute("error2", true);
+            model.addAttribute("name", sessionManager.getUserid() + "さん");
+            return "account/accountDataChangeTpl";
+        } else if(accountService.changeAccount(sessionManager.getUserid(), pass, newId).equals("failed1")) {
+            model.addAttribute("error1", true);
+            model.addAttribute("name", sessionManager.getUserid() + "さん");
+            return "account/accountDataChangeTpl";
         } else {
-            model.addAttribute("error", true);
+            model.addAttribute("error3", true);
             model.addAttribute("name", sessionManager.getUserid() + "さん");
             return "account/accountDataChangeTpl";
         }

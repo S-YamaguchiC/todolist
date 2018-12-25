@@ -32,8 +32,12 @@ public class AccountService {
         account.setPasswd(passwd);
         if (accountRepository.change(account, newId).equals("success")) {
             return "success";
+        } else if (accountRepository.change(account, newId).equals("failed1")){
+            return "failed1";
+        } else if (accountRepository.change(account, newId).equals("failed2")) {
+            return "failed2";
         } else {
-            return "failed";
+            return "failed3";
         }
     }
 

@@ -36,15 +36,20 @@ public class AccountRepositoryImpl implements AccountRepository {
     @Override
     public String change(Account account, String newId) {
         String sql1 = "select count(userid) from users where userid = ? and passwd = ?";
-        String sql2 = "update users set userid = ? where userid = ? and passwd = ?";
+        String sql2 = "select count(userid) from users where userid = ?";
+        String sql3 = "update users set userid = ? where userid = ? and passwd = ?";
         if (jdbcTemplate.queryForObject(sql1, Integer.class, account.getUserid(), account.getPasswd()) == 1) {
-            if (jdbcTemplate.update(sql2, newId, account.getUserid(), account.getPasswd()) == 1) {
-                return "success";
+            if (jdbcTemplate.queryForObject(sql2, Integer.class, newId) == 0) {
+                if (jdbcTemplate.update(sql3, newId, account.getUserid(), account.getPasswd()) == 1) {
+                    return "success";
+                } else {
+                    return "failed3";
+                }
             } else {
-                return "failed";
+                return "failed2";
             }
         } else {
-            return "failed";
+            return "failed1";
         }
     }
 

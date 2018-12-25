@@ -48,7 +48,15 @@
     </div>
 
     <div class="row justify-content-center">
-        <h5 th:if="${error}" style="color: red;">パスワードが間違っています</h5>
+        <h5 th:if="${error3}" style="color: red;">IDの更新に失敗しました</h5>
+    </div>
+
+    <div class="row justify-content-center">
+        <h5 th:if="${error2}" style="color: red;">登録できないIDです</h5>
+    </div>
+
+    <div class="row justify-content-center">
+        <h5 th:if="${error1}" style="color: red;">パスワードが間違っています</h5>
     </div>
 
     <br>
