@@ -1,0 +1,6 @@
+heroku apps:create syama-todo
+heroku war:deploy target/todolist-0.0.1-SNAPSHOT.war --app syama-todo
+heroku logs --tail --app syama-todo
+heroku ps:scale web=1 --app syama-todo
+heroku ps --app syama-todo
+heroku apps:destroy --app syama-todo --confirm syama-todo
